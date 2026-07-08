@@ -200,3 +200,8 @@ Students must submit:
 4. A working GitHub Pages link for the deployed movie portal
 5. Evidence that the same responsive design approach was applied to the personalized movie portal
 6. All screenshots must be decorated in the [README.md](README.md) file.
+
+
+## Submission 
+![Phone](images/Screenshot 2026-07-08 101904.png)
+![ipad](images/Screenshot 2026-07-08 101922.png)
