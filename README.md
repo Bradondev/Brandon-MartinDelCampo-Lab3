@@ -203,5 +203,6 @@ Students must submit:
 
 
 ## Submission 
-![Phone](images/Screenshot 2026-07-08 101904.png)
-![ipad](images/Screenshot 2026-07-08 101922.png)
+
+![Phone](<images/Screenshot 2026-07-08 101904.png>)
+![ipad](<images/Screenshot 2026-07-08 101922.png>)
