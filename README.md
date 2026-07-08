@@ -206,3 +206,6 @@ Students must submit:
 
 ![Phone](<images/Screenshot 2026-07-08 101904.png>)
 ![ipad](<images/Screenshot 2026-07-08 101922.png>)
+
+![phone](<images/Screenshot 2026-07-08 102935.png>)
+![ipad](<images/Screenshot 2026-07-08 102942.png>)
