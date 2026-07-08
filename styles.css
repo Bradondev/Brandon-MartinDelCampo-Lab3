@@ -11,8 +11,6 @@
 
    element  - Selects all elements of a given type
               Examples: body, header, nav, section, table in HTML -> body, header, nav, section, table in CSS
-
-              
 ================================================== */
 
 /* ==================================================
@@ -23,6 +21,7 @@
     --csuf-blue: #00274c;
     --csuf-blue-light: #0a3d72;
     --csuf-orange: #f58220;
+    --csuf-orange-dark: #d96c10;
     --csuf-cream: #f9f6ef;
     --text-dark: #1f2933;
     --text-light: #ffffff;
@@ -52,8 +51,8 @@ body {
     color: var(--text-dark);
     background: var(--csuf-cream);
     font-family: "Trebuchet MS", sans-serif;
+    line-height: 1.5;
 }
-
 
 
 /* ==================================================
@@ -63,7 +62,9 @@ body {
 /* Centers content and limits how wide it can get. */
 .container {
     width: 1200px;
+    max-width: 100%;
     margin-inline: auto;
+    padding-inline: 1rem;
 }
 
 
@@ -86,7 +87,10 @@ header h1 {
 
 /* Styles the tagline below the title. */
 header p {
-    /* you can do something here */
+    margin: 0.6rem 0 0;
+    max-width: 640px;
+    font-size: 1.05rem;
+    color: #d7e6fa;
 }
 
 
@@ -97,19 +101,23 @@ header p {
 /* Styles the orange navigation bar. */
 nav {
     background-color: var(--csuf-orange);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 /* Removes bullets and places links in a row using Flexbox. */
 nav ul {
-    width: 1200px;
     margin: 0;
-    margin-inline: auto;
     padding: 0.5rem 1rem;
     list-style: none;
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 1rem;
+    max-width: 1200px;
+    margin-inline: auto;
 }
 
 /* Styles each navigation link. */
@@ -140,11 +148,6 @@ main {
     padding: 2.5rem 0;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 /* Styles each content section like a card. */
 .section {
     background: #ffffff;
@@ -152,6 +155,7 @@ img {
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 39, 76, 0.06);
 }
 
 /* Styles section headings. */
@@ -187,6 +191,7 @@ img {
 }
 
 /* Adds a small lift effect when hovering over a movie card. */
+/* NOTE: hover/transition animation is intentionally kept ONLY on .movie-card. */
 .movie-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 39, 76, 0.15);
@@ -198,6 +203,11 @@ img {
     margin: 0;
 }
 
+.movie-card h3 {
+    color: var(--csuf-blue);
+    font-size: 1.2rem;
+}
+
 /* Makes movie posters the same size and shape. */
 .movie-card img {
     width: 100%;
@@ -205,6 +215,27 @@ img {
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #e1e5ea;
+}
+
+/* Small heading used above each card's trailer/theme song player. */
+.movie-card h4 {
+    margin: 0;
+    color: var(--csuf-orange-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Keeps the trailer video and theme song audio player sized to the card. */
+.movie-card video {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e1e5ea;
+    background: #000;
+}
+
+.movie-card audio {
+    width: 100%;
 }
 
 
@@ -220,9 +251,18 @@ img {
     border-radius: 100px;
     padding: 0.55rem 1rem;
     text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
     background-color: var(--csuf-blue);
     color: var(--text-light);
     cursor: pointer;
+}
+
+/* Simple state swap on hover/focus (no transition - animation is reserved for movie cards). */
+.btn:hover,
+.btn:focus-visible {
+    background-color: var(--csuf-blue-light);
+    outline: none;
 }
 
 
@@ -231,14 +271,18 @@ img {
    The #reviews selector targets only the reviews section.
 ================================================== */
 
-
-
+/* Limits the width of the review form. */
+#reviews form {
+    max-width: 480px;
+    margin-top: 1rem;
+}
 
 /* Styles labels inside the reviews section. */
 #reviews label {
     display: inline-block;
-    margin-bottom: 0.35rem;
+    margin-top: 0.75rem;
     font-weight: 700;
+    color: var(--csuf-blue);
 }
 
 /* Styles text inputs, dropdowns, and textareas in the form. */
@@ -251,6 +295,8 @@ img {
     padding: 0.65rem 0.75rem;
     background-color: #f9fbfd;
     color: #334a60;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
 /* Gives the textarea a larger height and vertical resizing. */
@@ -269,11 +315,15 @@ img {
 }
 
 /* Makes the review form button orange instead of blue. */
-#reviews input[type="submit"] {
+#reviews .btn {
     background-color: var(--csuf-orange);
     color: #1f2125;
-    display: block;
-    margin-inline: auto;
+    margin-top: 0.5rem;
+}
+
+#reviews .btn:hover,
+#reviews .btn:focus-visible {
+    background-color: var(--csuf-orange-dark);
 }
 
 /* Styles the message saying the review feature is not ready. */
@@ -289,6 +339,8 @@ img {
 
 /* ==================================================
    10. Movies Table
+   Structural + visual polish only. No hover/transition
+   effects here by design (reserved for a future exercise).
 ================================================== */
 
 /* Styles the main movie table. */
@@ -298,17 +350,18 @@ img {
     border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
-}
-
-.table-wrap {
-    width: 100%;
-    overflow-x: auto;
+    margin-top: 0.5rem;
 }
 
 /* Styles the table header row. */
 .movies-table thead {
     background: var(--csuf-blue);
     color: var(--text-light);
+}
+
+.movies-table th {
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
 /* Adds padding and borders to table cells. */
@@ -319,6 +372,17 @@ img {
     border-bottom: 1px solid var(--border);
 }
 
+.movies-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Wraps the table so it scrolls horizontally instead of getting cut off
+   or forcing the whole page wider on small screens. */
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
 /* Adds alternating row color for readability. */
 .movies-table tbody tr:nth-child(even) {
     background-color: #f7fafc;
@@ -326,7 +390,32 @@ img {
 
 
 /* ==================================================
-   11. Footer
+   11. Genre List
+================================================== */
+
+/* Turns the plain bulleted genre list into a row of pills. */
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.genre-list li {
+    background: var(--csuf-cream);
+    border: 1px solid var(--csuf-orange);
+    color: var(--csuf-blue);
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+}
+
+
+/* ==================================================
+   12. Footer
 ================================================== */
 
 /* Styles the footer at the bottom of the page. */
@@ -354,19 +443,26 @@ footer a:focus-visible {
 }
 
 
+/* ==================================================
+   13. Responsive: Phone
+   Screens 640px and narrower (most phones in portrait).
+================================================== */
+@media (max-width: 640px) {
 
-/* DEMO: Uncomment to see effect */
-/* @media (max-width: 640px) {
     .container {
-        width: 95%;
+        width: 100%;
+        padding-inline: 1rem;
     }
 
     header {
         padding: 2rem 0;
     }
 
+    header p {
+        max-width: 100%;
+    }
+
     nav ul {
-        width: 100%;
         justify-content: center;
         gap: 0.25rem;
         padding: 0.4rem 0.5rem;
@@ -378,7 +474,7 @@ footer a:focus-visible {
         padding: 0.65rem 0.35rem;
     }
 
-
+    /* One movie card per row on a phone screen. */
     .movie-grid {
         grid-template-columns: 1fr;
     }
@@ -389,9 +485,79 @@ footer a:focus-visible {
         max-height: 420px;
         align-self: center;
     }
-} */
 
-/* TODO: Add responsive design for iPads */
-/* @media (max-width: 1024px) {
+    .movie-card video {
+        max-height: 220px;
+    }
 
-} */
+    .genre-list {
+        justify-content: center;
+    }
+
+    .movies-table th,
+    .movies-table td {
+        padding: 0.55rem;
+        font-size: 0.9rem;
+    }
+
+    #reviews form {
+        max-width: 100%;
+    }
+
+    footer {
+        padding: 1.25rem 1rem;
+    }
+}
+
+
+/* ==================================================
+   14. Responsive: iPad / Tablet
+   Between phone (above) and desktop. Bounded with a
+   min-width so it only governs the range the phone query
+   doesn't already handle. Covers iPad mini/Air/Pro widths.
+================================================== */
+@media (min-width: 641px) and (max-width: 1024px) {
+
+    .container {
+        width: 100%;
+        padding-inline: 1.5rem;
+    }
+
+    header {
+        padding: 2.1rem 0;
+    }
+
+    nav ul {
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.55rem 1.5rem;
+    }
+
+    nav a {
+        padding: 0.6rem 0.4rem;
+    }
+
+    /* Exactly two movie cards per row on tablet, instead of letting
+       auto-fit squeeze in 3-4 or collapse to 1. */
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .movie-card img {
+        height: 260px;
+    }
+
+    .movie-card video {
+        max-height: 240px;
+    }
+
+    .movies-table th,
+    .movies-table td {
+        padding: 0.6rem 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    #reviews form {
+        max-width: 100%;
+    }
+}
